@@ -33,7 +33,7 @@ export function GistImageAnalyzer() {
   };
 
   return (
-    <div className="p-4 space-y-3 bg-gray-50 rounded-md border">
+    <div className="p-4 space-y-3 bg-gray-50 text-black rounded-md border">
       <h3 className="text-sm font-medium">Analisis Gambar 🧠</h3>
 
       <input type="file" accept="image/*" onChange={handleFileChange} />
