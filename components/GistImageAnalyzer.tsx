@@ -1,0 +1,64 @@
+"use client";
+
+import { useState } from "react";
+import { analyzeImage } from "@/lib/api";
+
+export function GistImageAnalyzer() {
+  const [image, setImage] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [result, setResult] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      setImage(file);
+      setPreview(URL.createObjectURL(file));
+    }
+  };
+
+  const handleAnalyze = async () => {
+    if (!image) return;
+    setLoading(true);
+    setResult("");
+
+    try {
+      const data = await analyzeImage(image);
+      setResult(data.analysis);
+    } catch (err) {
+      setResult("Gagal menganalisis gambar.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="p-4 space-y-3 bg-gray-50 rounded-md border">
+      <h3 className="text-sm font-medium">Analisis Gambar 🧠</h3>
+
+      <input type="file" accept="image/*" onChange={handleFileChange} />
+
+      {preview && (
+        <img
+          src={preview}
+          alt="preview"
+          className="w-full rounded-md border object-contain max-h-40"
+        />
+      )}
+
+      <button
+        onClick={handleAnalyze}
+        disabled={!image || loading}
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md"
+      >
+        {loading ? "Menganalisis..." : "Analisis Gambar"}
+      </button>
+
+      {result && (
+        <div className="bg-white border rounded-md p-3 text-sm text-gray-800 whitespace-pre-wrap max-h-48 overflow-y-auto">
+          {result}
+        </div>
+      )}
+    </div>
+  );
+}

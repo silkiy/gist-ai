@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { GistHeader } from "@/components/GistHeader";
 import { GistSummary } from "@/components/GistSummary";
 import { GistChat } from "@/components/GistChat";
+import { GistImageAnalyzer } from "@/components/GistImageAnalyzer";
 
 declare const chrome:
   | {
@@ -48,6 +49,7 @@ export default function Page() {
       <div className="flex-1 overflow-y-auto px-4 py-3 space-y-4">
         <GistSummary currentUrl={url} onSummaryReady={setSummary} />
         {summary && <GistChat summary={summary} />}
+        <GistImageAnalyzer />
       </div>
     </div>
   );

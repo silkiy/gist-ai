@@ -17,3 +17,17 @@ export const chatWithSummary = async (prompt: string, summary: string) => {
     if (!res.ok) throw new Error("Gagal memproses chat");
     return await res.json();
 };
+
+export const analyzeImage = async (file: File) => {
+    const formData = new FormData();
+    formData.append("image", file);
+
+    const res = await fetch("https://gemini-api-app-bice.vercel.app/api/chat/analyze-image", {
+        method: "POST",
+        body: formData,
+    });
+
+    if (!res.ok) throw new Error("Gagal menganalisis gambar");
+
+    return await res.json();
+};
