@@ -30,7 +30,7 @@ export function GistChat({ summary }: { summary: string }) {
     } catch {
       setChatHistory((prev) => [
         ...prev,
-        { sender: "ai", message: "Terjadi kesalahan saat memproses." },
+        { sender: "ai", message: "An error occurred while processing." },
       ]);
     } finally {
       setLoading(false);
@@ -60,7 +60,7 @@ export function GistChat({ summary }: { summary: string }) {
           value={chatInput}
           onChange={(e) => setChatInput(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && handleSend()}
-          placeholder="Tanyakan sesuatu..."
+          placeholder="Ask something..."
           className="flex-1 border rounded-md px-3 py-1.5 text-sm outline-none"
         />
         <button
@@ -68,7 +68,7 @@ export function GistChat({ summary }: { summary: string }) {
           disabled={loading}
           className="bg-blue-600 hover:bg-blue-700 text-white px-3 py-1.5 rounded-md text-sm"
         >
-          Kirim
+          Send
         </button>
       </div>
     </div>

@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+    "name": "Gist AI",
+    "version": "1.0",
+    "description": "Extension Gist AI",
+    "action": {
+        "default_popup": "index.html",
+        "default_icon": {
+            "16": "icons/icon16.jpg",
+            "48": "icons/icon48.jpg",
+            "128": "icons/icon128.jpg"
+        }
+    },
+    "permissions": [
+        "tabs",
+        "activeTab",
+        "scripting",
+        "storage"
+    ],
+    "host_permissions": [
+        "http://localhost:3000/*",
+        "https://gist-ai.vercel.app/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    }
+}

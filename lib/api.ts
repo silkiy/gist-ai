@@ -4,7 +4,7 @@ export const summarizeArticle = async (url: string) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ articleUrl: url }),
     });
-    if (!res.ok) throw new Error("Gagal meringkas berita");
+    if (!res.ok) throw new Error("Failed to summarize the article");
     return await res.json();
 };
 
@@ -14,7 +14,7 @@ export const chatWithSummary = async (prompt: string, summary: string) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt, newsSummary: summary }),
     });
-    if (!res.ok) throw new Error("Gagal memproses chat");
+    if (!res.ok) throw new Error("Failed to process the chat");
     return await res.json();
 };
 
@@ -27,7 +27,7 @@ export const analyzeImage = async (file: File) => {
         body: formData,
     });
 
-    if (!res.ok) throw new Error("Gagal menganalisis gambar");
+    if (!res.ok) throw new Error("Failed to analyze the image");
 
     return await res.json();
 };

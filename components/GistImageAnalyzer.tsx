@@ -26,17 +26,39 @@ export function GistImageAnalyzer() {
       const data = await analyzeImage(image);
       setResult(data.analysis);
     } catch (err) {
-      setResult("Gagal menganalisis gambar.");
+      setResult("Failed to analyze the image.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="p-4 space-y-3 bg-gray-50 text-black rounded-md border">
-      <h3 className="text-sm font-medium">Analisis Gambar 🧠</h3>
+    <div className="p-4 space-y-3 bg-gray-50 text-black rounded-md border border-neutral-500">
+      <h3 className="text-sm font-medium">Image Analysis 🧠</h3>
 
-      <input type="file" accept="image/*" onChange={handleFileChange} />
+      <div className="flex flex-col items-center space-y-1">
+        <label
+          htmlFor="image-upload"
+          className="cursor-pointer w-full text-center bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-2xl transition"
+        >
+          Choose Image
+        </label>
+        <input
+          id="image-upload"
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="hidden"
+        />
+
+        {image && (
+          <p className="text-xs text-gray-600">
+            {image.name.length > 30
+              ? image.name.slice(0, 30) + "..."
+              : image.name}
+          </p>
+        )}
+      </div>
 
       {preview && (
         <img
@@ -49,9 +71,9 @@ export function GistImageAnalyzer() {
       <button
         onClick={handleAnalyze}
         disabled={!image || loading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md"
+        className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-2xl"
       >
-        {loading ? "Menganalisis..." : "Analisis Gambar"}
+        {loading ? "Analyzing..." : "Analyze Image"}
       </button>
 
       {result && (
